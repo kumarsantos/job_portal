@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import ApplyJobs from "../components/ApplyJobs";
+import ApplicationCard from "@/components/ApplicationCard";
 
 const Job = () => {
   const { session } = useSession();
@@ -44,18 +45,19 @@ const Job = () => {
     fnUpdatedJob({ isOpen }).then(() => fnJob());
   };
 
+
   if (!isLoaded) {
     return <BarLoader className="mb-4" width={"100%"} color="#367b7" />;
   }
   return (
-    <div className="flex flex-col gap-8 mt-5">
+    <div className="flex flex-col gap-8 mt-5 min-h-screen">
       <div className="flex flex-col-reverse md:flex-row justify-between items-center">
-        <h1 className="gradient-title font-extrabold pb-3 text-4xl sm:text-6xl ">
+        <h1 className="gradient-title font-extrabold pb-3 text-4xl ">
           {singleJob?.title}
         </h1>
         <img
           src={singleJob?.company?.logo_url}
-          className="h-12"
+          className="h-8"
           alt={singleJob?.title}
         />
       </div>
@@ -103,11 +105,11 @@ const Job = () => {
         </Select>
       )}
       <h2 className="text-2xl  font-bold">About the job</h2>
-      <p className="sm:text-md ">{singleJob?.description}</p>
-      <h2 className="text-2xl  font-bold">What we are looking for</h2>
+      <p className="sm:text-sm ">{singleJob?.description}</p>
+      <h2 className="text-2xl font-bold">What we are looking for</h2>
       <MDEditor.Markdown
         source={singleJob?.requirements}
-        className="bg-transparent sm:text-lg"
+        className="bg-transparent sm:text-md"
       />
 
       {/* Render applications */}
@@ -121,6 +123,15 @@ const Job = () => {
           )}
         />
       )}
+      {singleJob?.recruiter_id === user?.id &&
+        singleJob?.applications?.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <h2 className="text-xl  font-bold ">Applications</h2>
+            {singleJob?.applications?.map((app) => (
+              <ApplicationCard app={app} key={app?.id} isCandidate={false} />
+            ))}
+          </div>
+        )}
     </div>
   );
 };

@@ -38,7 +38,6 @@ const JobListing = () => {
   });
 
   const { data: companies, fn: fnCompanies } = useFetchJobs(getCompanies);
-  console.log(companies);
 
   useEffect(() => {
     if (session) {

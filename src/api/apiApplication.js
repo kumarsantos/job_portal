@@ -36,3 +36,28 @@ export async function applyToJob(token, _, jobData) {
   }
   return data;
 }
+
+export async function updateApplications(token, { job_id }, status) {
+  const supabase = await supabaseClient(token);
+  const { data, error } = await supabase
+    .from("applications")
+    .update({ status })
+    .eq("job_id", job_id)
+    .select();
+  if (error || data?.length === 0) {
+    console.log("Error updating application status", error);
+    return null;
+  }
+  return data;
+}
+
+export async function addNewJob(token, _, jobData) {
+  const supabase = await supabaseClient(token);
+
+  const { data, error } = await supabase.from("jobs").insert(jobData).select();
+  if (error) {
+    console.log("Error creating new job", error);
+    return null;
+  }
+  return data;
+}
