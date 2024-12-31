@@ -26,6 +26,9 @@ const CreatedJobs = () => {
   }
   return (
     <div className="min-h-screen">
+      {!myJobsLoading && !myJobs?.length && (
+        <div className="text-center w-full">No Jobs Found</div>
+      )}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {myJobs?.map((item) => {
           return (

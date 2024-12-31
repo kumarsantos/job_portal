@@ -29,6 +29,9 @@ const CreatedApplications = () => {
       {applications?.map((item) => {
         return <ApplicationCard key={item.id} app={item} isCandidate />;
       })}
+      {!applicationsLoading && !applications?.length && (
+        <div className="text-center w-full">No Applications Found</div>
+      )}
     </div>
   );
 };
