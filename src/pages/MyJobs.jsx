@@ -1,27 +1,26 @@
 /** @format */
 
-import { useSession } from "@clerk/clerk-react";
-import { getSingleJob } from "../api/apiCompanies";
-import useFetch from "../hooks/useFetch";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
+import CreatedApplications from "@/components/CreatedApplications";
+import CreatedJobs from "@/components/CreatedJobs";
 
 const MyJobs = () => {
-  const { session } = useSession();
-  const { id } = useParams();
-  console.log(id)
+  const { isLoaded, user } = useUser();
 
-  const { data: singleJob, fn: fnJob } = useFetch(getSingleJob, { job_id: id });
-
-  useEffect(() => {
-    if (session) {
-      fnJob();
-    }
-  }, [session]);
-
-  console.log(singleJob);
-
-  return <div>MyJobs</div>;
+  return (
+    <div>
+      <h1 className="gradient-title font-extrabold pb-8 text-5xl sm:text-7xl text-center">
+        {user?.unsafeMetadata?.role === "candidate"
+          ? "My Applications"
+          : "My Jobs"}
+      </h1>
+      {user?.unsafeMetadata?.role === "candidate" ? (
+        <CreatedApplications />
+      ) : (
+        <CreatedJobs />
+      )}
+    </div>
+  );
 };
 
 export default MyJobs;

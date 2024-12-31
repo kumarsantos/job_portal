@@ -1,3 +1,10 @@
+/**
+ * eslint-disable react/prop-types
+ *
+ * @format
+ */
+
+/** @format */
 
 import {
   Card,
@@ -13,24 +20,31 @@ import { saveJob } from "../api/apiJobs";
 import { useUser } from "@clerk/clerk-react";
 import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
+import { deleteJob } from "@/api/apiApplication";
 
 const JobCard = ({
   job,
   isMyJob = false,
   isSaved = false,
   onSave = () => {},
-  onUnsave = () => {},
-  onClick = () => {},
 }) => {
   const { user } = useUser();
 
   const [saved, setSaved] = useState(isSaved);
-  const { data, loading, error, fn } = useFetch(saveJob, {
+  const { data, loading, fn } = useFetch(saveJob, {
     already_saved: saved,
+  });
+  const { fn: fnDelete } = useFetch(deleteJob, {
+    job_id: job?.id,
   });
 
   const handleSaveJob = async () => {
     await fn({ user_id: user.id, job_id: job?.id });
+    onSave();
+  };
+
+  const handleDeleteJob = async () => {
+    await fnDelete({ job_id: job?.id });
     onSave();
   };
 
@@ -50,7 +64,7 @@ const JobCard = ({
             <Trash2Icon
               size={18}
               fill="red"
-              onClick={onUnsave}
+              onClick={handleDeleteJob}
               className="text-red-300 cursor-pointer"
             />
           )}

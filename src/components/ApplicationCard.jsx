@@ -35,7 +35,6 @@ const ApplicationCard = ({ app, isCandidate = false }) => {
     link.target = "_blank";
     link.click();
   };
-  console.log({ app });
 
   const handleStatusChange = async (status) => {
     fnUpdatedJob(status);
@@ -47,7 +46,7 @@ const ApplicationCard = ({ app, isCandidate = false }) => {
       <CardHeader>
         <CardTitle className="flex justify-between items-center font-bold">
           {isCandidate
-            ? `${app?.job?.title} at ${app?.job?.comany?.name}`
+            ? `${app?.job?.title} at ${app?.job?.company?.name}`
             : app?.name}
           <Download
             size={18}

@@ -54,7 +54,6 @@ export async function saveJob(token, { already_saved }, saveData) {
 }
 
 export async function addNewCompany(token, _, companyData) {
-
   const supabase = await supabaseClient(token);
 
   const random = Math.floor(Math.random() * 900000);
@@ -88,3 +87,19 @@ export async function addNewCompany(token, _, companyData) {
   }
   return data;
 }
+
+export async function getSavedJobs(token) {
+  const supabase = await supabaseClient(token);
+
+  let query = supabase.from("saved_jobs").select("*,job:jobs(*,company:companies(name,logo_url))");
+
+  const { data, error } = await query;
+  if (error) {
+    console.log("Error Fetching Saved Jobs", error);
+    return null;
+  }
+  return data;
+}
+
+
+
