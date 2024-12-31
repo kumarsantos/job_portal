@@ -1,5 +1,4 @@
-/** @format */
-
+/* eslint-disable react/prop-types */
 import { useUser } from "@clerk/clerk-react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -10,8 +9,6 @@ const ProtectedRoute = ({ children }) => {
   if (isLoaded && !isSignedIn) {
     return <Navigate to="/?sign-in=true" replace={true} />;
   }
-
-  //Check onboarding
   if (
     user !== undefined &&
     !user?.unsafeMetadata?.role &&

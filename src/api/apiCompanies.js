@@ -1,5 +1,3 @@
-/** @format */
-
 import supabaseClient from "../utils/supabase";
 
 export async function getCompanies(token) {

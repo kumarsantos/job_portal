@@ -1,10 +1,8 @@
-/** @format */
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { getApplications } from "@/api/apiApplication";
-import App from "@/App";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BarLoader } from "react-spinners";
 import ApplicationCard from "./ApplicationCard";
 
@@ -14,7 +12,6 @@ const CreatedApplications = () => {
   const {
     data: applications,
     loading: applicationsLoading,
-    error: applicationsError,
     fn: fnApplications,
   } = useFetch(getApplications, { user_id: user?.id });
 
@@ -30,7 +27,6 @@ const CreatedApplications = () => {
   return (
     <div className="flex flex-col gap-4">
       {applications?.map((item) => {
-        console.log(item);
         return <ApplicationCard key={item.id} app={item} isCandidate />;
       })}
     </div>

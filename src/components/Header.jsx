@@ -1,5 +1,3 @@
-/** @format */
-
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "./ui/button";
 import {

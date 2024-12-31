@@ -1,20 +1,17 @@
-/** @format */
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { getSavedJobs } from "@/api/apiJobs";
 import JobCard from "@/components/JobCard";
 import useFetch from "@/hooks/useFetch";
-import { useSession, useUser } from "@clerk/clerk-react";
-import React, { useEffect } from "react";
+import { useUser } from "@clerk/clerk-react";
+import  { useEffect } from "react";
 import { BarLoader } from "react-spinners";
 
 const SavedJobs = () => {
-  const { session } = useSession();
   const { isLoaded } = useUser();
 
   const {
     data: jobs,
     loading: jobsLoading,
-    error: jobsError,
     fn: fnJobs,
   } = useFetch(getSavedJobs);
 

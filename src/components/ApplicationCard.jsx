@@ -1,6 +1,4 @@
-/** @format */
-
-import React from "react";
+/* eslint-disable react/prop-types */
 import {
   Card,
   CardContent,
@@ -22,7 +20,6 @@ import {
 
 const ApplicationCard = ({ app, isCandidate = false }) => {
   const {
-    data: updatedJob,
     loading: loadingHiringStatus,
     fn: fnUpdatedJob,
   } = useFetch(updateApplications, {

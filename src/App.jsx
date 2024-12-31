@@ -12,10 +12,16 @@ import SavedJobs from "./pages/SavedJobs";
 import Job from "./pages/Job";
 import { ThemeProvider } from "./components/theme-provider";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ErrorBoundary from "./components/ErrorBoundary";
+import NotFound from "./components/NotFound";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: (
+      <ErrorBoundary>
+        <AppLayout />
+      </ErrorBoundary>
+    ),
     children: [
       {
         path: "/",
@@ -25,7 +31,9 @@ const router = createBrowserRouter([
         path: "/onboarding",
         element: (
           <ProtectedRoute>
-            <Onboarding />,
+            <ErrorBoundary>
+              <Onboarding />,
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
@@ -33,7 +41,9 @@ const router = createBrowserRouter([
         path: "/jobs",
         element: (
           <ProtectedRoute>
-            <JobListing />
+            <ErrorBoundary>
+              <JobListing />
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
@@ -41,7 +51,9 @@ const router = createBrowserRouter([
         path: "/job/:id",
         element: (
           <ProtectedRoute>
-            <Job />{" "}
+            <ErrorBoundary>
+              <Job />{" "}
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
@@ -49,7 +61,9 @@ const router = createBrowserRouter([
         path: "/my-jobs",
         element: (
           <ProtectedRoute>
-            <MyJobs />{" "}
+            <ErrorBoundary>
+              <MyJobs />{" "}
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
@@ -57,7 +71,9 @@ const router = createBrowserRouter([
         path: "/post-job",
         element: (
           <ProtectedRoute>
-            <PostJob />{" "}
+            <ErrorBoundary>
+              <PostJob />{" "}
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
@@ -65,11 +81,21 @@ const router = createBrowserRouter([
         path: "/saved-jobs",
         element: (
           <ProtectedRoute>
-            <SavedJobs />{" "}
+            <ErrorBoundary>
+              <SavedJobs />{" "}
+            </ErrorBoundary>
           </ProtectedRoute>
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    element: (
+      <ErrorBoundary>
+        <NotFound />
+      </ErrorBoundary>
+    ),
   },
 ]);
 

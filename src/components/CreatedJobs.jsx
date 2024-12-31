@@ -1,9 +1,8 @@
-/** @format */
-
-import { getApplications, getMyJobs } from "@/api/apiApplication";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { getMyJobs } from "@/api/apiApplication";
 import useFetch from "@/hooks/useFetch";
 import { useUser } from "@clerk/clerk-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BarLoader } from "react-spinners";
 import JobCard from "./JobCard";
 
@@ -13,7 +12,6 @@ const CreatedJobs = () => {
   const {
     data: myJobs,
     loading: myJobsLoading,
-    error: myJobsError,
     fn: fnMyJobs,
   } = useFetch(getMyJobs, { recruiter_id: user?.id });
 

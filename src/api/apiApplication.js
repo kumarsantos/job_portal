@@ -1,5 +1,3 @@
-/** @format */
-
 import supabaseClient, { supabaseUrl } from "../utils/supabase";
 
 export async function applyToJob(token, _, jobData) {

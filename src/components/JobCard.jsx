@@ -1,11 +1,4 @@
-/**
- * eslint-disable react/prop-types
- *
- * @format
- */
-
-/** @format */
-
+/* eslint-disable react/prop-types */
 import {
   Card,
   CardContent,
