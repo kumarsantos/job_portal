@@ -134,6 +134,7 @@ const JobListing = () => {
           );
         })}
       </div>
+        {!jobsLoading && !jobs?.length && <div className="text-center w-full">No Jobs Found</div>}
     </div>
   );
 };
