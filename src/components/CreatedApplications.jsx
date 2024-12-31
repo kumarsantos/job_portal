@@ -30,7 +30,7 @@ const CreatedApplications = () => {
         return <ApplicationCard key={item.id} app={item} isCandidate />;
       })}
       {!applicationsLoading && !applications?.length && (
-        <div className="text-center w-full">No Applications Found</div>
+        <div className="flex justify-center items-center text-center w-full min-h-[400px]">No Applications Found</div>
       )}
     </div>
   );

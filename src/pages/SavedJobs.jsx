@@ -26,12 +26,12 @@ const SavedJobs = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div>
       <h1 className="gradient-title font-extrabold pb-8 text-5xl sm:text-7xl text-center">
         Saved Jobs
       </h1>
 
-      {!jobsLoading && !jobs?.length && <div>No saved jobs</div>}
+      {!jobsLoading && !jobs?.length && <div className="min-h-[400px] flex items-center justify-center">No saved jobs</div>}
       <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {jobs?.map(({ job, id }) => {
           return <JobCard key={id} job={job} isSaved={true} onSave={fnJobs} />;
